@@ -57,10 +57,13 @@ public class FortNitta extends ApplicationAdapter {
         mMainScene.update();
 
         /* Clear the screen before drawing anything new */
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         /* Tell LibGDX we're about to make a bunch of drawing calls */
+
+        /* Enable alpha transparency */
+        batch.enableBlending();
 		batch.begin();
 
         /* Call draw() on all the child components of our active game state */

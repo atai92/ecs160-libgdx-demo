@@ -97,7 +97,8 @@ public class Map extends DrawableGameComponent {
                 int y = Integer.parseInt(castleDimensionsSplit[1]);
                 // Set the character at the array indices to 'C' to represent 'Castle'
                 mMap[y][x] = 'C';
-                mCastleLocations.add(new Vector2(x, y));
+                mCastleLocations.add(new Vector2(x * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                                                 y * Constants.TILE_SIZE * Constants.SCALE_FACTOR));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -132,7 +133,7 @@ public class Map extends DrawableGameComponent {
             /* If there exists a Castle near this location */
 
             /* Play a sound */
-            Constants.SOUND_TRIUMPH.play(1.0f);
+            Constants.SOUND_TRIUMPH.play(0.5f);
 
             /* If we've never clicked near this castle before */
             if (!mCastleClickLocations.contains(clickLocation, false)) {
@@ -159,7 +160,8 @@ public class Map extends DrawableGameComponent {
             /* If the distance between the stored castle location and my click */
             float distance_in_px = castleLocation.dst(clickLocation);
             /* Is within a tolerable range, just say "yes, you clicked near a castle" */
-            return distance_in_px <= Constants.NEAR_DISTANCE;
+            if (distance_in_px <= Constants.NEAR_DISTANCE)
+                return true;
         }
 
         return false;
@@ -237,29 +239,29 @@ public class Map extends DrawableGameComponent {
      * @param tileLocation  The pixel coordinates, in the tileset, of the top-left corner of our tile.
      * @return whether the input was processed
      */
-    private void drawTile(SpriteBatch spriteBatch, Texture tileset, float srcTileX, float srcTileY, Vector2 tileLocation) {
+    private void drawTile(SpriteBatch spriteBatch, Texture tileset, int srcTileX, int srcTileY, Vector2 tileLocation) {
         /* Using the SpriteBatch provided from ApplicationAdapter */
         spriteBatch.draw(
-            /* Using the specified tileset */
-            Constants.TEXTURE_TERRAIN,
-            /* Draw to this on-screen X coordinate */
-            srcTileX * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
-            /* Draw to this on-screen Y coordinate */
-            srcTileY * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
-            /* Draw it this wide */
-            Constants.TILE_SIZE * Constants.SCALE_FACTOR,
-            /* And draw it just as tall */
-            Constants.TILE_SIZE * Constants.SCALE_FACTOR,
-            /* X coordinate, in the tileset, of the top-left corner of our tile. */
-            (int)Constants.TILE_LOCATION_TERRAIN_WATER.x,
-            /* Y coordinate, in the tileset, of the top-left corner of our tile. */
-            (int)Constants.TILE_LOCATION_TERRAIN_WATER.y,
-            /* The width of our tile */
-            Constants.TILE_SIZE,
-            /* The height of our tile */
-            Constants.TILE_SIZE,
-            /* Do not flip the image on either axis. */
-            false, false
-        );
+                /* Using the specified tileset */
+                tileset,
+                /* Draw to this on-screen X coordinate */
+                srcTileX * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                /* Draw to this on-screen Y coordinate */
+                srcTileY * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                /* Draw it this wide */
+                Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                /* And draw it just as tall */
+                Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                /* X coordinate, in the tileset, of the top-left corner of our tile. */
+                (int)tileLocation.x,
+                /* Y coordinate, in the tileset, of the top-left corner of our tile. */
+                (int)tileLocation.y,
+                /* The width of our tile */
+                Constants.TILE_SIZE,
+                /* The height of our tile */
+                Constants.TILE_SIZE,
+                /* Do not flip the image on either axis. */
+                false, false
+            );
     }
 }
