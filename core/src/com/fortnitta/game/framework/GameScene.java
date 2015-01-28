@@ -1,15 +1,25 @@
 package com.fortnitta.game.framework;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/** An autonomous game state.
+ *
+ * A GameScene is the implementation of a game state.
+ * InputProcessor is a LibGDX interface for handling touch input.
+ */
+public abstract class GameScene implements InputProcessor {
 
-public abstract class GameScene {
-
+    /** The list of game components. Each component's update() method is automatically called. */
     protected List<GameComponent> mUpdateables;
+
+    /** The list of drawable components. Each component's draw() method is automatically called. */
     protected List<DrawableGameComponent> mDrawables;
+
+    /** The SpriteBatch we received from ApplicationAdapter, passed to each child component draw() call. */
     protected SpriteBatch mSpriteBatch;
 
     protected GameScene(SpriteBatch batch) {
@@ -18,14 +28,21 @@ public abstract class GameScene {
         mDrawables = new ArrayList<DrawableGameComponent>();
     }
 
+    /** Add a new component to our state/scene.
+       These just spin with the game loop and update game logic.
+    */
     public void AddComponent(GameComponent component) {
         mUpdateables.add(component);
     }
 
+    /** Add a new drawable component to our state/scene.
+       These spin with the game loop, update game logic, and draw themselves.
+    */
     public void AddDrawableComponent(DrawableGameComponent component) {
         mDrawables.add(component);
     }
 
+    /** Initialize all child components */
     public void initialize() {
         for (GameComponent component : mUpdateables)
             component.initialize();
@@ -33,6 +50,7 @@ public abstract class GameScene {
             component.initialize();
     }
 
+    /** Update all child components */
     public void update() {
         for (GameComponent component : mUpdateables)
             component.update();
@@ -40,6 +58,8 @@ public abstract class GameScene {
             component.update();
 
     }
+
+    /** Draw all child components */
     public void draw() {
         for (DrawableGameComponent component : mDrawables)
             component.draw(mSpriteBatch);
