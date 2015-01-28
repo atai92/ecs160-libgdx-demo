@@ -11,7 +11,7 @@ public class Constants {
     /* The range, in pixels, at which two clicks locations varying by this amount are considered
        to be clicking the same location. Used for clicking castles, because my fingers are fat.
      */
-    public static final float NEAR_DISTANCE = 50f;
+    public static final float DISTANCE_SENSITIVITY = 175f;
 
     /* The size of each tile.
      *

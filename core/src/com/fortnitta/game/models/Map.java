@@ -135,11 +135,18 @@ public class Map extends DrawableGameComponent {
             /* Play a sound */
             Constants.SOUND_TRIUMPH.play(0.5f);
 
-            /* If we've never clicked near this castle before */
-            if (!mCastleClickLocations.contains(clickLocation, false)) {
-                /* Remember this location so we don't count clicks near this location again */
-                mCastleClickLocations.add(clickLocation);
+            /* If we've clicked near this castle before */
+            boolean countClick = true;
+            for (Vector2 previousClickLocation : mCastleClickLocations) {
+                /* If the distance between a previous click location and my current click location */
+                float distance_in_px = clickLocation.dst(previousClickLocation);
+                /* Is within a tolerable range, just say "yes, you clicked near a previously clicked point" */
+                if (distance_in_px <= Constants.DISTANCE_SENSITIVITY)
+                /* So don't count the click */
+                    countClick = false;
             }
+            if (countClick)
+                mCastleClickLocations.add(clickLocation);
         }
 
         /* Let the game know this event was handled */
@@ -160,7 +167,7 @@ public class Map extends DrawableGameComponent {
             /* If the distance between the stored castle location and my click */
             float distance_in_px = castleLocation.dst(clickLocation);
             /* Is within a tolerable range, just say "yes, you clicked near a castle" */
-            if (distance_in_px <= Constants.NEAR_DISTANCE)
+            if (distance_in_px <= Constants.DISTANCE_SENSITIVITY)
                 return true;
         }
 
