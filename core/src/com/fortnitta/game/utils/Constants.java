@@ -20,7 +20,8 @@ public class Constants {
     public static final int TILE_SIZE = 12;
 
     /* Rendered textures can be scaled to any decimal */
-    public static final float SCALE_FACTOR = 4.0f;
+    public static final float Y_SCALE_FACTOR = 1.0f * 1920/(12*44);
+    public static final float X_SCALE_FACTOR = 1.0f * 1080/(12*22);
 
     /* Map texture objects */
     public static final Texture TEXTURE_TERRAIN = new Texture(Gdx.files.internal("2DTerrain.png"));
@@ -28,6 +29,24 @@ public class Constants {
 
     /* Locations of tiles within tilesets */
     public static final Vector2 TILE_LOCATION_TERRAIN_WATER = new Vector2(0, 24 * Constants.TILE_SIZE);
+
+    public static final Vector2 TILE_LOCATION_TERRAIN_TOP_SHORE_DARK = new Vector2(0, 2 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_TOP_SHORE_LIGHT = new Vector2(0, 3 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_BOTTOM_SHORE_DARK = new Vector2(0, 10 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_BOTTOM_SHORE_LIGHT = new Vector2(0, 11 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_TOP_RIGHT_SHORE_LIGHT = new Vector2(0, 4 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_TOP_RIGHT_SHORE_DARK = new Vector2(0, 5 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_RIGHT_SHORE_LIGHT = new Vector2(0, 6 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_RIGHT_SHORE_DARK = new Vector2(0, 7 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_BOTTOM_RIGHT_SHORE_LIGHT = new Vector2(0, 8 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_BOTTOM_RIGHT_SHORE_DARK = new Vector2(0, 9 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_BOTTOM_LEFT_SHORE_LIGHT = new Vector2(0, 13 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_BOTTOM_LEFT_SHORE_DARK = new Vector2(0, 12 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_LEFT_SHORE_LIGHT = new Vector2(0, 14 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_LEFT_SHORE_DARK = new Vector2(0, 15 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_TOP_LEFT_SHORE_LIGHT = new Vector2(0, 16 * Constants.TILE_SIZE);
+    public static final Vector2 TILE_LOCATION_TERRAIN_TOP_LEFT_SHORE_DARK = new Vector2(0, 17 * Constants.TILE_SIZE);
+
     public static final Vector2 TILE_LOCATION_TERRAIN_GRASS_DARK = new Vector2(0, 0 * Constants.TILE_SIZE);
     public static final Vector2 TILE_LOCATION_TERRAIN_GRASS_LIGHT = new Vector2(0, 1 * Constants.TILE_SIZE);
     public static final Vector2 TILE_LOCATION_CASTLE_CANNON_CASTLE_BROWN = new Vector2(0, 0 * Constants.TILE_SIZE);

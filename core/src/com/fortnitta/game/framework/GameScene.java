@@ -1,6 +1,7 @@
 package com.fortnitta.game.framework;
 
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public abstract class GameScene implements InputProcessor {
 
     /** The SpriteBatch we received from ApplicationAdapter, passed to each child component draw() call. */
     protected SpriteBatch mSpriteBatch;
+
+    private OrthographicCamera camera;
 
     protected GameScene(SpriteBatch batch) {
         mSpriteBatch = batch;
@@ -44,6 +47,8 @@ public abstract class GameScene implements InputProcessor {
 
     /** Initialize all child components */
     public void initialize() {
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false,1920,1080);
         for (GameComponent component : mUpdateables)
             component.initialize();
         for (DrawableGameComponent component : mDrawables)
@@ -61,6 +66,7 @@ public abstract class GameScene implements InputProcessor {
 
     /** Draw all child components */
     public void draw() {
+        camera.update();
         for (DrawableGameComponent component : mDrawables)
             component.draw(mSpriteBatch);
     }

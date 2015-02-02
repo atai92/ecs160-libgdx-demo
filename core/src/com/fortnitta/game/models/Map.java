@@ -97,8 +97,8 @@ public class Map extends DrawableGameComponent {
                 int y = Integer.parseInt(castleDimensionsSplit[1]);
                 // Set the character at the array indices to 'C' to represent 'Castle'
                 mMap[y][x] = 'C';
-                mCastleLocations.add(new Vector2(x * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
-                                                 y * Constants.TILE_SIZE * Constants.SCALE_FACTOR));
+                mCastleLocations.add(new Vector2(x * Constants.TILE_SIZE * Constants.X_SCALE_FACTOR,
+                                                 y * Constants.TILE_SIZE * Constants.Y_SCALE_FACTOR));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -203,22 +203,13 @@ public class Map extends DrawableGameComponent {
                                     Constants.TILE_LOCATION_CASTLE_CANNON_CASTLE_BROWN);
                             break;
                         case 'B':
-                            this.drawTile(spriteBatch, Constants.TEXTURE_TERRAIN,
-                                    x,
-                                    y,
-                                    Constants.TILE_LOCATION_TERRAIN_GRASS_DARK);
+                            GrassTiler.draw(spriteBatch,x,y);
                             break;
                         case 'R':
-                            this.drawTile(spriteBatch, Constants.TEXTURE_TERRAIN,
-                                    x,
-                                    y,
-                                    Constants.TILE_LOCATION_TERRAIN_GRASS_LIGHT);
+                            GrassTiler.draw(spriteBatch, x, y);
                             break;
                         case ' ':
-                            this.drawTile(spriteBatch, Constants.TEXTURE_TERRAIN,
-                                    x,
-                                    y,
-                                    Constants.TILE_LOCATION_TERRAIN_WATER);
+                            WaterTiler.draw(spriteBatch, x, y, mMap);
                             break;
                     }
                 }
@@ -245,13 +236,13 @@ public class Map extends DrawableGameComponent {
                 /* Using the specified tileset */
                 tileset,
                 /* Draw to this on-screen X coordinate */
-                srcTileX * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                srcTileX * Constants.TILE_SIZE * Constants.X_SCALE_FACTOR,
                 /* Draw to this on-screen Y coordinate */
-                srcTileY * Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                srcTileY * Constants.TILE_SIZE * Constants.Y_SCALE_FACTOR,
                 /* Draw it this wide */
-                Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                Constants.TILE_SIZE * Constants.X_SCALE_FACTOR,
                 /* And draw it just as tall */
-                Constants.TILE_SIZE * Constants.SCALE_FACTOR,
+                Constants.TILE_SIZE * Constants.Y_SCALE_FACTOR,
                 /* X coordinate, in the tileset, of the top-left corner of our tile. */
                 (int)tileLocation.x,
                 /* Y coordinate, in the tileset, of the top-left corner of our tile. */
